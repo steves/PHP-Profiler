@@ -82,7 +82,7 @@ class Profiler_Console {
 	 * @param string $sql
 	 * @return void
 	 */
-	public static function logQuery($sql) {
+	public static function logQuery($sql, $explain = null) {
 		// We use a hash of the query for two reasons. One is because for large queries the
 		// hash will be considerably smaller in memory. The second is to make a dump of the
 		// logs more easily readable.
@@ -94,15 +94,19 @@ class Profiler_Console {
 			$query = array_pop(self::$debugger_logs['console'][$hash]);
 			if (!$query['end_time']) {
 				$query['end_time'] = microtime(true);
+				$query['explain'] = $explain;
+
 				self::$debugger_logs['console'][$hash][] = $query;
 			} else {
 				self::$debugger_logs['console'][$hash][] = $query;
 			}
+
 			return;
 		}
 
 		$log_item = array('start_time' => microtime(true),
 						  'end_time' => false,
+						  'explain' => false,
 						  'type' => 'query',
 						  'sql' => $sql);
 

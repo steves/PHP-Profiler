@@ -135,6 +135,7 @@ class Profiler_Profiler {
 			foreach ($entries as $i => $log) {
 				if ($log['type'] == 'query' && isset($log['end_time'])) {
 					$query = array('sql' => $log['sql'],
+								   'explain' => $log['explain'],
 								   'time' => ($log['end_time'] - $log['start_time']),
 								   'duplicate' => $i > 0 ? true : false);
 
@@ -157,7 +158,7 @@ class Profiler_Profiler {
 
 					// If a query profiler callback is setup get the profiler data
 					if (isset($this->config['query_profiler_callback']) && !empty($this->config['query_profiler_callback']))
-					$query['profile'] = $this->_attemptToProfileQuery($query['sql']);
+						$query['profile'] = $this->_attemptToProfileQuery($query['sql']);
 
 					$queries[] = $query;
 				}
