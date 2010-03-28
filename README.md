@@ -60,6 +60,7 @@ Using a custom callback to explain queries for console
 PHP Profiler lets you pass in some configuration options to help allow it to suit your own needs.
 
 - **query_explain_callback** is the callback used to explain SQL queries to get additional information on them. The format used should be the same as that used by PHP's [call_user_func](http://us2.php.net/call_user_func) function.
+- **query_profiler_callback** is used to integrate a database level profiler such as [MySQL's query profiler](http://wiki.github.com/steves/PHP-Profiler/the-mysql-query-profiler).
 
 ## Features ##
 Below are some of the features of PHP Profiler
@@ -73,14 +74,6 @@ Below are some of the features of PHP Profiler
 - Log memory usage of any string, variable or object
 - Log specific points in your script to see how long it takes to get to them
 - See how many queries on a given page are inserts, updates, selects and deletes with query type counting
-
-## Changes ##
-Some of the changes made to the original include:
-
-- The code has been cleaned up quite a bit and is a bit more readable now
-- Classes have been renamed to allow them to be auto loaded
-- Merged database class into Profiler_Console to make it easier and cleaner to integrate
-- Removed MySQL dependence, any database should work now.
 
 ## Sites Using PHP Profiler ##
 Using PHP Profiler on your site? Let me know! If you don't want to be featured here just say so, but I still like knowing how people are using PHP Profiler so send me a message or an email and let me know.
