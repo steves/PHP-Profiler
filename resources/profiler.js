@@ -1,7 +1,5 @@
 (function($) {
-    var PQP_DETAILS = false;
-    var PQP_HEIGHT = 'short';
-    var PROFILER_DETAILS = false;
+    var profiler_details = false;
 
     function hideAllTabs() {
         $('#profiler').removeClass('console')
@@ -12,7 +10,7 @@
     }
 
     $(document).ready(function() {
-    setTimeout(function() { $('#profiler-container').css('display', 'block') }, 10);
+        setTimeout(function() { $('#profiler-container').css('display', 'block') }, 10);
 
         $('.query-profile H4').css('cursor', 'pointer').click(function() {
             if ($('table', $(this).parent()).is(':hidden')) {
@@ -25,28 +23,37 @@
         });
 
         $('.detailsToggle').click(function() {
-            if (PQP_DETAILS) {
+            if (profiler_details) {
                 $('#profiler-container').addClass('hideDetails');
-                PQP_DETAILS = false;
+                profiler_details = false;
             } else {
-            $('#profiler-container').removeClass('hideDetails');
-                PQP_DETAILS = true;
+                $('#profiler-container').removeClass('hideDetails');
+                profiler_details = true;
             }
+
             return false;
         });
 
         $('.heightToggle').click(function() {
-            var container = $('#pqp-container');
+            var container = $('#profiler-container');
 
-            if (container.hasClass('tallDetails'))
+            if (container.hasClass('tallDetails')) {
                 container.removeClass('tallDetails');
-            else
+            } else {
                 container.addClass('tallDetails');
+            }
         });
 
-        $('.tab').click(function() {
+        $('.tab').css('cursor', 'pointer').click(function() {
             hideAllTabs();
+
+            $(this).addClass('active');
             $('#profiler').addClass($(this).attr('id'));
+
+            if (!profiler_details) {
+                profiler_details = true;
+                $('#profiler-container').removeClass('hideDetails');
+            }
         });
     });
 })(jQuery);
