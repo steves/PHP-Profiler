@@ -70,7 +70,6 @@
 
 /* ----- Side ----- */
 .profiler .side { float: left; width: 20%; background: #000; color: #fff; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; text-align: center; }
-.profiler .side td { padding: 10px 0 5px 0; background: url(../images/pqp/side.png) repeat-y right; }
 .profiler .side var { color: #fff; font-size: 15px; }
 .profiler .side h4 { font-weight: normal; color: #F4FCCA; font-size: 11px; }
 
@@ -100,7 +99,7 @@
 #profiler-speed .side td.alt { background-color: #2B5481; border-bottom: 1px solid #1E3C5C; border-left: 1px solid #1E3C5C; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
 
 /* ----- Queries ----- */
-#profiler-queries .side { background-color: #953FA1; border-bottom: 1px solid #662A6E; border-left: 1px solid #662A6E; }
+#profiler-queries .side { background-color: #953FA1; }
 #profiler-queries .side td.alt { background-color: #7B3384; }
 #profiler-queries .main b { float: none; }
 #profiler-queries .main em { display: block; padding: 2px 0 0 0; font-style: normal; color: #aaa; }
@@ -111,7 +110,7 @@
 #profiler-memory .side td.alt { background-color: #AC7200; border-bottom: 1px solid #865900; border-left: 1px solid #865900; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
 
 /* ----- Files ----- */
-#profiler-files .side { background-color: #B72F09; border-bottom: 1px solid #7C1F00; border-left: 1px solid #7C1F00; }
+#profiler-files .side { background-color: #B72F09; }
 #profiler-files .side td.alt { background-color: #9B2700; }
 
 /* ----- Footer ----- */

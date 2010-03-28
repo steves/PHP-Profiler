@@ -11,6 +11,11 @@ class Profiler_Display {
 	public static function display($output) {
 		self::displayJavascript();
 
+		$overlay_image = base64_encode(file_get_contents(dirname(__FILE__) . '/resources/images/overlay.gif'));
+		$side_image = base64_encode(file_get_contents(dirname(__FILE__) . '/resources/images/side.png'));
+
+		$side_bg_style = 'padding: 10px 0 5px 0; background: url(data:image/png;base64,' . $side_image . ') repeat-y right; ';
+
 		$logCount = count($output['logs']['console']) - $output['queryTotals']['count'];
 		$fileCount = count($output['files']);
 		$memoryUsed = $output['memoryTotals']['used'];
@@ -45,27 +50,28 @@ class Profiler_Display {
 		echo '</table>';
 
 		// Start Console tab
-		echo '<div id="profiler-console" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
+		echo '<div id="profiler-console" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 
 		if ($logCount ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';
 			echo '<tr>';
-			echo '<td class="alt1"><var>'.$output['logs']['logCount'].'</var><h4>Logs</h4></td>';
-			echo '<td class="alt2"><var>'.$output['logs']['errorCount'].'</var> <h4>Errors</h4></td>';
+			echo '<td class="alt1" style="' . $side_bg_style . '"><var>' . $output['logs']['logCount'] . '</var><h4>Logs</h4></td>';
+			echo '<td class="alt2" style="' . $side_bg_style . '"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="alt3"><var>'.$output['logs']['memoryCount'].'</var> <h4>Memory</h4></td>';
-			echo '<td class="alt4"><var>'.$output['logs']['speedCount'].'</var> <h4>Speed</h4></td>';
+			echo '<td class="alt3" style="' . $side_bg_style . '"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
+			echo '<td class="alt4" style="' . $side_bg_style . '"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
 			echo '</tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
 
 			$class = '';
 			foreach ($output['logs']['console'] as $log) {
-				if (!isset($log['type']) || $log['type'] == 'query')
+				if (!isset($log['type']) || $log['type'] == 'query') {
 					continue;
+				}
 
 				echo '<tr class="log-' . $log['type'] . '"><td class="type">' . $log['type'] . '</td><td class="' . $class . '">';
 
@@ -88,13 +94,13 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Load Time tab
-		echo '<div id="profiler-speed" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
+		echo '<div id="profiler-speed" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['logs']['speedCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';
-			echo '<tr><td><var>' . $output['speedTotals']['total'] . '</var><h4>Load Time</h4></td></tr>';
-			echo '<tr><td class="alt"><var>' . $output['speedTotals']['allowed'] . '</var> <h4>Max Execution Time</h4></td></tr>';
+			echo '<tr><td style="' . $side_bg_style . '"><var>' . $output['speedTotals']['total'] . '</var><h4>Load Time</h4></td></tr>';
+			echo '<tr><td class="alt" style="' . $side_bg_style . '"><var>' . $output['speedTotals']['allowed'] . '</var> <h4>Max Execution Time</h4></td></tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
 
@@ -113,7 +119,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Database tab
-		echo '<div id="profiler-queries" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
+		echo '<div id="profiler-queries" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['queryTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -184,7 +190,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Memory tab
-		echo '<div id="profiler-memory" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
+		echo '<div id="profiler-memory" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['logs']['memoryCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -209,14 +215,14 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Files tab
-		echo '<div id="profiler-files" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
+		echo '<div id="profiler-files" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['fileTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';
-			echo '<tr><td><var>' . $output['fileTotals']['count'] . '</var><h4>Total Files</h4></td></tr>';
-			echo '<tr><td class="alt"><var>' . $output['fileTotals']['size'] . '</var> <h4>Total Size</h4></td></tr>';
-			echo '<tr><td><var>' . $output['fileTotals']['largest'] . '</var> <h4>Largest</h4></td></tr>';
+			echo '<tr><td style="' . $side_bg_style . '"><var>' . $output['fileTotals']['count'] . '</var><h4>Total Files</h4></td></tr>';
+			echo '<tr><td class="alt" style="' . $side_bg_style . '"><var>' . $output['fileTotals']['size'] . '</var> <h4>Total Size</h4></td></tr>';
+			echo '<tr><td style="' . $side_bg_style . '"><var>' . $output['fileTotals']['largest'] . '</var> <h4>Largest</h4></td></tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
 
@@ -244,7 +250,7 @@ class Profiler_Display {
 	}
 
 	public static function displayJavascript() {
-		echo '<style type="text/css">' . file_get_contents (dirname(__FILE__) . '/resources/profiler.css') . '</style>';
+		echo '<style type="text/css">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.css') . '</style>';
 		echo '<script type="text/javascript">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.js') . '</script>';
 	}
 }
