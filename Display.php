@@ -252,15 +252,7 @@
     }
 
     private static function displayJavascript() {
-      $css_url = self::$config['css_url'];
-      echo '<script type="text/javascript">
-          var sheet = document.createElement("link");
-          sheet.setAttribute("rel", "stylesheet");
-          sheet.setAttribute("type", "text/css");
-          sheet.setAttribute("href", "' . $css_url . '");
-          document.getElementsByTagName("head")[0].appendChild(sheet);
-        </script>';
-
-      echo '<script type="text/javascript">' . file_get_contents(dirname(__FILE__) . '/profiler.js') . '</script>';
+		echo '<style type="text/css">' . file_get_contents (dirname(__FILE__) . '/resources/profiler.css') . '</style>';
+		echo '<script type="text/javascript">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.js') . '</script>';
     }
   }
