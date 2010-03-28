@@ -5,18 +5,10 @@
  */
 class Profiler_Display {
 	/**
-	 * Holds a copy of the config passed into the display() method
-	 * @var array
-	 */
-	private static $config = array();
-
-	/**
 	 * Outputs the HTML, CSS and JavaScript that builds the console display
-	 * @param array $output A multi-dimensional array containing all the data needed to build the console
 	 * @param array $config A list of configuration options
 	 */
-	public static function display($output, $config) {
-		self::$config = $config;
+	public static function display($output) {
 		self::displayJavascript();
 
 		$logCount = count($output['logs']['console']) - $output['queryTotals']['count'];
@@ -55,7 +47,7 @@ class Profiler_Display {
 		// Start Console tab
 		echo '<div id="pqp-console" class="pqp-box">';
 
-		if($logCount ==  0) {
+		if ($logCount ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';
@@ -77,13 +69,13 @@ class Profiler_Display {
 
 				echo '<tr class="log-' . $log['type'] . '"><td class="type">' . $log['type'] . '</td><td class="' . $class . '">';
 
-				if($log['type'] == 'log') {
+				if ($log['type'] == 'log') {
 					echo '<div><pre>' . $log['data'] . '</pre></div>';
-				} elseif($log['type'] == 'memory') {
+				} else if ($log['type'] == 'memory') {
 					echo '<div><pre>' . $log['data'] . '</pre> <em>' . $log['dataType'].'</em>: ' . $log['name'] . ' </div>';
-				} elseif($log['type'] == 'speed') {
+				} else if ($log['type'] == 'speed') {
 					echo '<div><pre>' . $log['data'] . '</pre> <em>' . $log['name'] . '</em></div>';
-				} elseif($log['type'] == 'error') {
+				} else if ($log['type'] == 'error') {
 					echo '<div><em>Line ' . $log['line'].'</em> : ' . $log['data'] . ' <pre>' . $log['file'] . '</pre></div>';
 				}
 
@@ -173,12 +165,13 @@ class Profiler_Display {
 
 				if (isset($query['profile']) && is_array($query['profile'])) {
 					echo '<div class="query-profile"><h4>&#187; Show Query Profile</h4>';
-
 					echo '<table style="display: none">';
-					foreach ($query['profile'] as $line)
-						echo '<tr><td><em>' . $line['Status'] . '</em></td><td>' . $line['Duration'] . '</td></tr>';
-					echo '</table>';
 
+					foreach ($query['profile'] as $line) {
+						echo '<tr><td><em>' . $line['Status'] . '</em></td><td>' . $line['Duration'] . '</td></tr>';
+					}
+
+					echo '</table>';
 					echo '</div>';
 				}
 
@@ -250,7 +243,7 @@ class Profiler_Display {
 		echo '</div></div>';
 	}
 
-	private static function displayJavascript() {
+	public static function displayJavascript() {
 		echo '<style type="text/css">' . file_get_contents (dirname(__FILE__) . '/resources/profiler.css') . '</style>';
 		echo '<script type="text/javascript">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.js') . '</script>';
 	}
