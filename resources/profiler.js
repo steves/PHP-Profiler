@@ -1,5 +1,6 @@
 (function($) {
     var profiler_details = false;
+    var height_toggle = false;
 
     function hideAllTabs() {
         $('#profiler').removeClass('console')
@@ -10,7 +11,9 @@
     }
 
     $(document).ready(function() {
-        setTimeout(function() { $('#profiler-container').css('display', 'block') }, 10);
+        setTimeout(function() {
+            $('#profiler-container').css('display', 'block');
+        }, 10);
 
         $('.query-profile H4').css('cursor', 'pointer').click(function() {
             if ($('table', $(this).parent()).is(':hidden')) {
@@ -35,13 +38,11 @@
         });
 
         $('.heightToggle').click(function() {
-            var container = $('#profiler-container');
+            height_toggle = !height_toggle;
 
-            if (container.hasClass('tallDetails')) {
-                container.removeClass('tallDetails');
-            } else {
-                container.addClass('tallDetails');
-            }
+            $('.profiler-box').each(function() {
+                $(this).css('height', (height_toggle ? '500px' : '200px'));
+            });
         });
 
         $('.tab').css('cursor', 'pointer').click(function() {

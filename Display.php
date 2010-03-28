@@ -45,7 +45,7 @@ class Profiler_Display {
 		echo '</table>';
 
 		// Start Console tab
-		echo '<div id="profiler-console" class="profiler-box">';
+		echo '<div id="profiler-console" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 
 		if ($logCount ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
@@ -88,7 +88,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Load Time tab
-		echo '<div id="profiler-speed" class="profiler-box">';
+		echo '<div id="profiler-speed" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['logs']['speedCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -113,7 +113,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Database tab
-		echo '<div id="profiler-queries" class="profiler-box">';
+		echo '<div id="profiler-queries" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['queryTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -184,7 +184,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Memory tab
-		echo '<div id="profiler-memory" class="profiler-box">';
+		echo '<div id="profiler-memory" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['logs']['memoryCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -209,7 +209,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Files tab
-		echo '<div id="profiler-files" class="profiler-box">';
+		echo '<div id="profiler-files" class="profiler-box" style="background: url(../images/pqp/overlay.gif); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
 		if ($output['fileTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
