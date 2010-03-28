@@ -85,5 +85,3 @@ Some of the changes made to the original include:
 
 ## Sites Using PHP Profiler ##
 Using PHP Profiler on your site? Let me know! If you don't want to be featured here just say so, but I still like knowing how people are using PHP Profiler so send me a message or an email and let me know.
-
- - [FolioDriver](http://www.foliodriver.com)
