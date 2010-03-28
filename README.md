@@ -19,7 +19,7 @@ Setup is very easy and straight-forward. There are five primary steps that need 
 ## Setup and Usage ##
 Setting up PHP Profiler is quite simple. Below is a short code sample of the latest version.
 
-    $profiler = Profiler_Profiler(array('css_url' => '/css/profiler.css'));
+    $profiler = new Profiler_Profiler();
     Profiler_Console::logSpeed('Start Sample run');
     Profiler_Console::logMemory($object);
     Profiler_Console::logSpeed('End Sample run');
@@ -59,7 +59,6 @@ Using a custom callback to explain queries for console
 ## Configuration ##
 PHP Profiler lets you pass in some configuration options to help allow it to suit your own needs.
 
-- **css_url** allows you to tell PHP Profiler where the profiler.css file is located. This path should be absolute (eg /css/profiler.css)
 - **query_explain_callback** is the callback used to explain SQL queries to get additional information on them. The format used should be the same as that used by PHP's [call_user_func](http://us2.php.net/call_user_func) function.
 
 ## Features ##
