@@ -17,9 +17,9 @@ class Profiler_Display {
 		$queryCount = $output['queryTotals']['all'];
 		$speedTotal = $output['speedTotals']['total'];
 
-		echo '<div id="pqp-container" class="pQp hideDetails" style="display:none">';
-		echo '<div id="pQp" class="console">';
-		echo '<table id="pqp-metrics" cellspacing="0">';
+		echo '<div id="profiler-container" class="profiler hideDetails" style="display: none;">';
+		echo '<div id="profiler" class="console">';
+		echo '<table id="profiler-metrics" cellspacing="0">';
 		echo '<tr>';
 		echo '<td id="console" class="tab" style="color: #588E13;">';
 		echo '<var>' . $logCount . '</var>';
@@ -45,7 +45,7 @@ class Profiler_Display {
 		echo '</table>';
 
 		// Start Console tab
-		echo '<div id="pqp-console" class="pqp-box">';
+		echo '<div id="profiler-console" class="profiler-box">';
 
 		if ($logCount ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
@@ -88,7 +88,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Load Time tab
-		echo '<div id="pqp-speed" class="pqp-box">';
+		echo '<div id="profiler-speed" class="profiler-box">';
 		if ($output['logs']['speedCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -113,7 +113,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Database tab
-		echo '<div id="pqp-queries" class="pqp-box">';
+		echo '<div id="profiler-queries" class="profiler-box">';
 		if ($output['queryTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -184,7 +184,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Memory tab
-		echo '<div id="pqp-memory" class="pqp-box">';
+		echo '<div id="profiler-memory" class="profiler-box">';
 		if ($output['logs']['memoryCount'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -209,7 +209,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Files tab
-		echo '<div id="pqp-files" class="pqp-box">';
+		echo '<div id="profiler-files" class="profiler-box">';
 		if ($output['fileTotals']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
@@ -231,7 +231,7 @@ class Profiler_Display {
 		echo '</div>';
 
 		// Start Footer
-		echo '<table id="pqp-footer" cellspacing="0">';
+		echo '<table id="profiler-footer" cellspacing="0">';
 		echo '<tr>';
 		echo '<td class="credit"><a href="http://github.com/steves/PHP-Profiler" target="_blank"><strong>PHP</strong>&nbsp;Profiler</a></td>';
 		echo '<td class="actions">';

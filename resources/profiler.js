@@ -4,7 +4,7 @@
     var PROFILER_DETAILS = false;
 
     function hideAllTabs() {
-        $('#pQp').removeClass('console')
+        $('#profiler').removeClass('console')
                  .removeClass('speed')
                  .removeClass('queries')
                  .removeClass('memory')
@@ -12,7 +12,7 @@
     }
 
     $(document).ready(function() {
-        setTimeout(function(){ $('#pqp-container').css('display', 'block')}, 10);
+    setTimeout(function() { $('#profiler-container').css('display', 'block') }, 10);
 
         $('.query-profile H4').css('cursor', 'pointer').click(function() {
             if ($('table', $(this).parent()).is(':hidden')) {
@@ -26,10 +26,10 @@
 
         $('.detailsToggle').click(function() {
             if (PQP_DETAILS) {
-                $('#pqp-container').addClass('hideDetails');
+                $('#profiler-container').addClass('hideDetails');
                 PQP_DETAILS = false;
             } else {
-                $('#pqp-container').removeClass('hideDetails');
+            $('#profiler-container').removeClass('hideDetails');
                 PQP_DETAILS = true;
             }
             return false;
@@ -46,7 +46,7 @@
 
         $('.tab').click(function() {
             hideAllTabs();
-            $('#pQp').addClass($(this).attr('id'));
+            $('#profiler').addClass($(this).attr('id'));
         });
     });
 })(jQuery);
