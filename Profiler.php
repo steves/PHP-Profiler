@@ -134,7 +134,7 @@ class Profiler_Profiler {
 	 */
 	public function gatherQueryData() {
 		$queries = array();
-		$type_default = array('total' => 0, 'time' => 0);
+		$type_default = array('total' => 0, 'time' => 0, 'percentage' => 0, 'time_percentage' => 0);
 		$types = array('select' => $type_default, 'update' => $type_default, 'insert' => $type_default, 'delete' => $type_default);
 		$queryTotals = array('all' => 0, 'count' => 0, 'time' => 0, 'duplicates' => 0, 'types' => $types);
 
