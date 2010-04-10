@@ -1,6 +1,7 @@
 (function($) {
     var profiler_details = false;
     var height_toggle = false;
+    var selected_log_type = null;
 
     function hideAllTabs() {
         $('#profiler').removeClass('console')
@@ -55,6 +56,35 @@
                 profiler_details = true;
                 $('#profiler-container').removeClass('hideDetails');
             }
+        });
+
+        $('#profiler-console .side td').each(function() {
+            var log_type = $(this).attr('id').split('-')[1];
+            var log_count = $('var', $(this)).html();
+
+            if (log_count == 0) {
+                return;
+            }
+
+            $(this).css('cursor', 'pointer').click(function() {
+                $(this).css('color', '00000');
+
+                $('#profiler-console .main tr').each(function() {
+                    var row_type = $(this).attr('class').split('-')[1];
+
+                    if (row_type == log_type || selected_log_type == log_type) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+                if (selected_log_type == log_type) {
+                    selected_log_type = null;
+                } else {
+                    selected_log_type = log_type;
+                }
+            });
         });
     });
 })(jQuery);

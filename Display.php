@@ -57,16 +57,16 @@ class Profiler_Display {
 		} else {
 			echo '<table class="side" cellspacing="0">';
 			echo '<tr>';
-			echo '<td class="alt1"><var>' . $output['logs']['logCount'] . '</var><h4>Logs</h4></td>';
-			echo '<td class="alt2"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
+			echo '<td class="alt1" id="console-log"><var>' . $output['logs']['logCount'] . '</var><h4>Logs</h4></td>';
+			echo '<td class="alt2" id="console-error"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="alt3"><var>' . $output['logs']['benchmarkCount'] . '</var><h4>Benchmarks</h4></td>';
+			echo '<td class="alt3" id="console-benchmark"><var>' . $output['logs']['benchmarkCount'] . '</var><h4>Benchmarks</h4></td>';
 			echo '<td class="alt4"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="alt5"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
-			echo '<td class="alt6"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
+			echo '<td class="alt5" id="console-memory"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
+			echo '<td class="alt6" id="console-speed"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
 			echo '</tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
