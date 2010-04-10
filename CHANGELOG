@@ -4,6 +4,7 @@
  - Further code cleanup
  - Moved all JavaScript over to jQuery
  - Cleaned up CSS and removed last references to PQP
+ - Added support for benchmarks
 
 Version 1
  - Initial fork
