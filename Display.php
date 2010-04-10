@@ -9,7 +9,7 @@ class Profiler_Display {
 	 * @param array $config A list of configuration options
 	 */
 	public static function display($output) {
-		self::displayJavascript();
+		self::displayCssJavascript();
 
 		$overlay_image = base64_encode(file_get_contents(dirname(__FILE__) . '/resources/images/overlay.gif'));
 		$side_image = base64_encode(file_get_contents(dirname(__FILE__) . '/resources/images/side.png'));
@@ -269,7 +269,7 @@ class Profiler_Display {
 		echo '</div></div>';
 	}
 
-	public static function displayJavascript() {
+	public static function displayCssJavascript() {
 		echo '<style type="text/css">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.css') . '</style>';
 		echo '<script type="text/javascript">' . file_get_contents(dirname(__FILE__) . '/resources/profiler.js') . '</script>';
 	}
