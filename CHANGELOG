@@ -5,6 +5,7 @@
  - Moved all JavaScript over to jQuery
  - Cleaned up CSS and removed last references to PQP
  - Added support for benchmarks
+ - Allow filtering of console logs by clicking on log type
 
 Version 1
  - Initial fork
