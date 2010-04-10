@@ -158,11 +158,25 @@ class Profiler_Display {
 				}
 
 				if (isset($query['explain']) && $query['explain']) {
+					$explain = $query['explain'];
 					echo '<em>';
-					echo 'Possible keys: <b>' . $query['explain']['possible_keys'] . '</b> &middot;';
-					echo 'Key Used: <b>' . $query['explain']['key'] . '</b> &middot;';
-					echo 'Type: <b>' . $query['explain']['type'] . '</b> &middot;';
-					echo 'Rows: <b>' . $query['explain']['rows'] . '</b> &middot;';
+					
+					if (isset($explain['possible_keys'])) {
+						echo 'Possible keys: <b>' . $explain['possible_keys'] . '</b> &middot;';
+					}
+
+					if (isset($explain['key'])) {
+						echo 'Key Used: <b>' . $explain['key'] . '</b> &middot;';
+					}
+
+					if (isset($explain['type'])) {
+						echo 'Type: <b>' . $explain['type'] . '</b> &middot;';
+					}
+
+					if (isset($explain['rows'])) {
+						echo 'Rows: <b>' . $explain['rows'] . '</b> &middot;';
+					}
+
 					echo 'Speed: <b>' . $query['time'] . '</b>';
 					echo '</em>';
 				} else if (isset($query['time'])) {
