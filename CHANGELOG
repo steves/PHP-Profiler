@@ -3,7 +3,7 @@
  - Changed how images and CSS are loaded so they don't need to be web accessible
  - Further code cleanup
  - Moved all JavaScript over to jQuery
- - Cleaned up CSS and replaced external sheet with inline CSS
+ - Cleaned up CSS and removed last references to PQP
 
 Version 1
  - Initial fork
