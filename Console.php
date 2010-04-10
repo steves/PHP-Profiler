@@ -9,10 +9,10 @@ class Profiler_Console {
 	 * @var array
 	 */
 	private static $debugger_logs = array('console' => array(),
-										  'logCount' => 0,
-										  'memoryCount' => 0,
-										  'errorCount' => 0,
-										  'speedCount' => 0);
+		'logCount' => 0,
+		'memoryCount' => 0,
+		'errorCount' => 0,
+		'speedCount' => 0);
 
 	/**
 	 * Logs a variable to the console
@@ -20,10 +20,13 @@ class Profiler_Console {
 	 * @return void
 	 */
 	public static function log($data) {
-		if (!isset(self::$debugger_logs['console']))
+		if (!isset(self::$debugger_logs['console'])) {
 			self::$debugger_logs['console'] = array();
-		if (!isset(self::$debugger_logs['logCount']))
+		}
+
+		if (!isset(self::$debugger_logs['logCount'])) {
 			self::$debugger_logs['logCount'] = 0;
+		}
 
 		self::$debugger_logs['console'][] = array('data' => $data, 'type' => 'log');
 		self::$debugger_logs['logCount'] += 1;
@@ -37,10 +40,11 @@ class Profiler_Console {
 	 */
 	public static function logMemory($object = false, $name = 'PHP') {
 		$memory = $object ? strlen(serialize($object)) : memory_get_usage();
+
 		$log_item = array('data' => $memory,
-						  'type' => 'memory',
-						  'name' => $name,
-						  'dataType' => gettype($object));
+			'type' => 'memory',
+			'name' => $name,
+			'dataType' => gettype($object));
 
 		self::$debugger_logs['console'][] = $log_item;
 		self::$debugger_logs['memoryCount'] += 1;
@@ -54,9 +58,9 @@ class Profiler_Console {
 	 */
 	public static function logError($exception, $message) {
 		$log_item = array('data' => $message,
-						  'type' => 'error',
-						  'file' => $exception->getFile(),
-						  'line' => $exception->getLine());
+			'type' => 'error',
+			'file' => $exception->getFile(),
+			'line' => $exception->getLine());
 
 		self::$debugger_logs['console'][] = $log_item;
 		self::$debugger_logs['errorCount'] += 1;
@@ -70,8 +74,8 @@ class Profiler_Console {
 	 */
 	public static function logSpeed($name = 'Point in Time') {
 		$log_item = array('data' => microtime(true),
-						  'type' => 'speed',
-						  'name' => $name);
+			'type' => 'speed',
+			'name' => $name);
 
 		self::$debugger_logs['console'][] = $log_item;
 		self::$debugger_logs['speedCount'] += 1;
@@ -105,10 +109,10 @@ class Profiler_Console {
 		}
 
 		$log_item = array('start_time' => microtime(true),
-						  'end_time' => false,
-						  'explain' => false,
-						  'type' => 'query',
-						  'sql' => $sql);
+			'end_time' => false,
+			'explain' => false,
+			'type' => 'query',
+			'sql' => $sql);
 
 		self::$debugger_logs['console'][$hash][] = $log_item;
 	}

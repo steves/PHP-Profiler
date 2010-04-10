@@ -29,8 +29,9 @@ class Profiler_Profiler {
 	 * @param int $startTime Time to use as the start time of the profiler
 	 */
 	public function __construct(array $config = array(), $startTime = null) {
-		if (is_null($startTime))
+		if (is_null($startTime)) {
 			$startTime = microtime(true);
+		}
 
 		$this->startTime = $startTime;
 		$this->config = $config;
@@ -60,20 +61,24 @@ class Profiler_Profiler {
 	 */
 	public function gatherConsoleData() {
 		$logs = Profiler_Console::getLogs();
-		if (!isset($logs['console']) || !is_array($logs['console']))
+
+		if (!isset($logs['console']) || !is_array($logs['console'])) {
 			$logs['console'] = array();
+		}
 
 		if ($logs['console']) {
 			foreach ($logs['console'] as $key => $log) {
-				if (!isset($log['type']))
+				if (!isset($log['type'])) {
 					continue;
+				}
 
-				if ($log['type'] == 'log')
+				if ($log['type'] == 'log') {
 					$logs['console'][$key]['data'] = print_r($log['data'], true);
-				else if ($log['type'] == 'memory')
+				} elseif ($log['type'] == 'memory') {
 					$logs['console'][$key]['data'] = $this->getReadableFileSize($log['data']);
-				else if ($log['type'] == 'speed')
+				} elseif ($log['type'] == 'speed') {
 					$logs['console'][$key]['data'] = $this->getReadableTime(($log['data'] - $this->startTime)*1000);
+				}
 			}
 		}
 
@@ -86,20 +91,21 @@ class Profiler_Profiler {
 	public function gatherFileData() {
 		$files = get_included_files();
 		$fileList = array();
-		$fileTotals = array('count' => count($files),
-							'size' => 0,
-							'largest' => 0);
+		$fileTotals = array('count' => count($files), 'size' => 0, 'largest' => 0);
 
 		foreach($files as $key => $file) {
 			$size = filesize($file);
 			$fileList[] = array('name' => $file, 'size' => $this->getReadableFileSize($size));
 			$fileTotals['size'] += $size;
-			if($size > $fileTotals['largest'])
+
+			if ($size > $fileTotals['largest']) {
 				$fileTotals['largest'] = $size;
+			}
 		}
 		
 		$fileTotals['size'] = $this->getReadableFileSize($fileTotals['size']);
 		$fileTotals['largest'] = $this->getReadableFileSize($fileTotals['largest']);
+
 		$this->output['files'] = $fileList;
 		$this->output['fileTotals'] = $fileTotals;
 	}
@@ -111,6 +117,7 @@ class Profiler_Profiler {
 		$memoryTotals = array();
 		$memoryTotals['used'] = $this->getReadableFileSize(memory_get_peak_usage());
 		$memoryTotals['total'] = ini_get('memory_limit');
+
 		$this->output['memoryTotals'] = $memoryTotals;
 	}
 
@@ -125,19 +132,21 @@ class Profiler_Profiler {
 
 		foreach($this->output['logs']['console'] as $entries) {
 			// If type is set it's not a query
-			if (isset($entries['type']))
+			if (isset($entries['type'])) {
 				continue;
+			}
 
-			if (count($entries) > 1)
+			if (count($entries) > 1) {
 				$queryTotals['duplicates'] += 1;
+			}
 
 			$queryTotals['count'] += 1;
 			foreach ($entries as $i => $log) {
 				if ($log['type'] == 'query' && isset($log['end_time'])) {
 					$query = array('sql' => $log['sql'],
-								   'explain' => $log['explain'],
-								   'time' => ($log['end_time'] - $log['start_time']),
-								   'duplicate' => $i > 0 ? true : false);
+						'explain' => $log['explain'],
+						'time' => ($log['end_time'] - $log['start_time']),
+						'duplicate' => $i > 0 ? true : false);
 
 					// Lets figure out the type of query for our countes
 					$trimmed = trim($log['sql']);
@@ -153,12 +162,14 @@ class Profiler_Profiler {
 					$query['time'] = $this->getReadableTime($query['time']);
 
 					// If an explain callback is setup try to get the explain data
-					if (isset($this->config['query_explain_callback']) && !empty($this->config['query_explain_callback']))
+					if (isset($this->config['query_explain_callback']) && !empty($this->config['query_explain_callback'])) {
 						$query['explain'] = $this->_attemptToExplainQuery($query['sql']);
+					}
 
 					// If a query profiler callback is setup get the profiler data
-					if (isset($this->config['query_profiler_callback']) && !empty($this->config['query_profiler_callback']))
+					if (isset($this->config['query_profiler_callback']) && !empty($this->config['query_profiler_callback'])) {
 						$query['profile'] = $this->_attemptToProfileQuery($query['sql']);
+					}
 
 					$queries[] = $query;
 				}
@@ -207,14 +218,18 @@ class Profiler_Profiler {
 		$lastsizestring = end($sizes);
 
 		foreach ($sizes as $sizestring) {
-			if ($size < 1024)
+			if ($size < 1024) {
 				break;
-			if ($sizestring != $lastsizestring)
+			}
+
+			if ($sizestring != $lastsizestring) {
 				$size /= 1024;
+			}
 		}
 
-		if ($sizestring == $sizes[0])
-			$retstring = '%01d %s'; // Bytes aren't normally fractional
+		if ($sizestring == $sizes[0]) {
+			$retstring = '%01d %s';
+		}
 
 		return sprintf($retstring, $size, $sizestring);
 	}
@@ -228,12 +243,12 @@ class Profiler_Profiler {
 		$ret = $time;
 		$formatter = 0;
 		$formats = array('ms', 's', 'm');
-		if($time >= 1000 && $time < 60000) {
+		if ($time >= 1000 && $time < 60000) {
 			$formatter = 1;
 			$ret = ($time / 1000);
 		}
 
-		if($time >= 60000) {
+		if ($time >= 60000) {
 			$formatter = 2;
 			$ret = ($time / 1000) / 60;
 		}
