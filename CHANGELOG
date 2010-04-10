@@ -1,0 +1,14 @@
+﻿Version 2
+ - Made tabs clickable while profiler is hidden
+ - Changed how images and CSS are loaded so they don't need to be web accessible
+ - Further code cleanup
+ - Moved all JavaScript over to jQuery
+ - Cleaned up CSS and replaced external sheet with inline CSS
+
+Version 1
+ - Initial fork
+ - Did some code cleanup
+ - Moved JavaScript over to using jQuery
+ - Removed MySQL dependency
+ - Added support for the MySQL Query Profiler
+ - Added query stats
