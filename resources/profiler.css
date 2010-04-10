@@ -77,7 +77,7 @@
 #profiler-console .side td { padding: 12px 0; }
 #profiler-console .side td.alt1 { background: #588E13; width: 51%; }
 #profiler-console .side td.alt2 { background-color: #B72F09; }
-#profiler-console .side td.alt3 { background: #D28C00; border-bottom: 1px solid #9C6800; border-left: 1px solid #9C6800; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
+#profiler-console .side td.alt3 { background: #D28C00; border-left: 1px solid #9C6800; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
 #profiler-console .side td.alt4 { background-color: #3769A0; border-bottom: 1px solid #274B74; }
 #profiler-console .main table { width: 100%; }
 #profiler-console td div { width: 100%; overflow: hidden; }
@@ -96,7 +96,7 @@
 /* ----- Speed ----- */
 #profiler-speed .side td { padding: 12px 0; }
 #profiler-speed .side { background-color: #3769A0; }
-#profiler-speed .side td.alt { background-color: #2B5481; border-bottom: 1px solid #1E3C5C; border-left: 1px solid #1E3C5C; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
+#profiler-speed .side td.alt { background-color: #2B5481; border-left: 1px solid #1E3C5C; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
 
 /* ----- Queries ----- */
 #profiler-queries .side { background-color: #953FA1; }
@@ -107,7 +107,7 @@
 /* ----- Memory ----- */
 #profiler-memory .side td { padding:12px 0; }
 #profiler-memory .side { background-color: #C48200; }
-#profiler-memory .side td.alt { background-color: #AC7200; border-bottom: 1px solid #865900; border-left: 1px solid #865900; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
+#profiler-memory .side td.alt { background-color: #AC7200; border-left: 1px solid #865900; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
 
 /* ----- Files ----- */
 #profiler-files .side { background-color: #B72F09; }
