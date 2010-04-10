@@ -15,6 +15,14 @@ class Profiler_Profiler {
 	 * @var array
 	 */
 	public $config = array();
+	
+	/**
+	 * The list of query types we care about for type specific stats
+	 *
+	 * @var array 
+	 *
+	 */
+	protected $_queryTypes = array('select', 'update', 'delete', 'insert');
 
 	/**
 	 * Sets the configuration options for this object and sets the start time.
@@ -148,10 +156,11 @@ class Profiler_Profiler {
 						'time' => ($log['end_time'] - $log['start_time']),
 						'duplicate' => $i > 0 ? true : false);
 
-					// Lets figure out the type of query for our countes
+					// Lets figure out the type of query for our counts
 					$trimmed = trim($log['sql']);
 					$type = strtolower(substr($trimmed, 0, strpos($trimmed, ' ')));
-					if (isset($queryTotals['types'][$type])) {
+
+					if (isset($this->_queryTypes[$type]) && isset($queryTotals['types'][$type])) {
 						$queryTotals['types'][$type]['total'] += 1;
 						$queryTotals['types'][$type]['time'] += $query['time'];
 					}
@@ -162,7 +171,10 @@ class Profiler_Profiler {
 					$query['time'] = $this->getReadableTime($query['time']);
 
 					// If an explain callback is setup try to get the explain data
-					if (isset($this->config['query_explain_callback']) && !empty($this->config['query_explain_callback'])) {
+					if (isset($this->_queryTypes[$type])
+						&& isset($this->config['query_explain_callback']) 
+						&& !empty($this->config['query_explain_callback'])) {
+
 						$query['explain'] = $this->_attemptToExplainQuery($query['sql']);
 					}
 
