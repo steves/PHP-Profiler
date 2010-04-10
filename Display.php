@@ -61,8 +61,12 @@ class Profiler_Display {
 			echo '<td class="alt2"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="alt3"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
-			echo '<td class="alt4"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
+			echo '<td class="alt3"><var>' . $output['logs']['benchmarkCount'] . '</var><h4>Benchmarks</h4></td>';
+			echo '<td class="alt4"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<td class="alt5"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
+			echo '<td class="alt6"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
 			echo '</tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
@@ -83,6 +87,8 @@ class Profiler_Display {
 					echo '<div><pre>' . $log['data'] . '</pre> <em>' . $log['name'] . '</em></div>';
 				} else if ($log['type'] == 'error') {
 					echo '<div><em>Line ' . $log['line'].'</em> : ' . $log['data'] . ' <pre>' . $log['file'] . '</pre></div>';
+				} else if ($log['type'] == 'benchmark') {
+					echo '<div><pre>' . $log['data'] . '</pre> <em>' . $log['name'] . '</em></div>';
 				}
 
 				echo '</td></tr>';

@@ -86,6 +86,8 @@ class Profiler_Profiler {
 					$logs['console'][$key]['data'] = $this->getReadableFileSize($log['data']);
 				} elseif ($log['type'] == 'speed') {
 					$logs['console'][$key]['data'] = $this->getReadableTime(($log['data'] - $this->startTime)*1000);
+				} elseif ($log['type'] == 'benchmark') {
+					$logs['console'][$key]['data'] = $this->getReadableTime($log['end_time'] - $log['start_time']);
 				}
 			}
 		}
@@ -171,10 +173,7 @@ class Profiler_Profiler {
 					$query['time'] = $this->getReadableTime($query['time']);
 
 					// If an explain callback is setup try to get the explain data
-					if (isset($this->_queryTypes[$type])
-						&& isset($this->config['query_explain_callback']) 
-						&& !empty($this->config['query_explain_callback'])) {
-
+					if (isset($this->_queryTypes[$type]) && isset($this->config['query_explain_callback']) && !empty($this->config['query_explain_callback'])) {
 						$query['explain'] = $this->_attemptToExplainQuery($query['sql']);
 					}
 
@@ -212,6 +211,10 @@ class Profiler_Profiler {
 		$speedTotals['total'] = $this->getReadableTime((microtime(true) - $this->startTime)*1000);
 		$speedTotals['allowed'] = ini_get('max_execution_time');
 		$this->output['speedTotals'] = $speedTotals;
+	}
+
+	public function gatherBenchmarkData() {
+
 	}
 
 	/**
@@ -279,6 +282,7 @@ class Profiler_Profiler {
 		$this->gatherMemoryData();
 		$this->gatherQueryData();
 		$this->gatherSpeedData();
+		$this->gatherBenchmarkData();
 
 		Profiler_Display::display($this->output, $this->config);
 	}

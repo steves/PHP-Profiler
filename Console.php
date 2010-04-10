@@ -12,7 +12,8 @@ class Profiler_Console {
 		'logCount' => 0,
 		'memoryCount' => 0,
 		'errorCount' => 0,
-		'speedCount' => 0);
+		'speedCount' => 0,
+		'benchmarkCount' => 0);
 
 	/**
 	 * Logs a variable to the console
@@ -115,6 +116,35 @@ class Profiler_Console {
 			'sql' => $sql);
 
 		self::$debugger_logs['console'][$hash][] = $log_item;
+	}
+	
+	/**
+	 * Records the time it takes for an action to occur
+	 *
+	 * @param string $name The name of the benchmark
+	 * @return void
+	 *
+	 */
+	public static function logBenchmark($name) {
+		$key = 'benchmark_ ' . $name;
+
+		if (isset(self::$debugger_logs['console'][$key])) {
+			$benchKey = md5(microtime(true));
+
+			self::$debugger_logs['console'][$benchKey] = self::$debugger_logs['console'][$key];
+			self::$debugger_logs['console'][$benchKey]['end_time'] = microtime(true);
+			
+			unset(self::$debugger_logs['console'][$key]);
+			return;
+		}
+
+		$log_item = array('start_time' => microtime(true),
+			'end_time' => false,
+			'name' => $name,
+			'type' => 'benchmark');
+
+		self::$debugger_logs['console'][$key] = $log_item;
+		self::$debugger_logs['benchmarkCount'] += 1;
 	}
 
 	/**
