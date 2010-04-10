@@ -1,5 +1,5 @@
 # PHP Profiler #
-Version 0.1 - Sunday August 2 2009
+Version 2
 
 by Steven Surowiec
 <steven.surowiec@gmail.com>
