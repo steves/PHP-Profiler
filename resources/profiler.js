@@ -77,10 +77,13 @@
                     }
                 });
 
+                $('#profiler-console .side td').removeClass('selected');
+
                 if (selected_log_type == log_type) {
                     selected_log_type = null;
                 } else {
                     selected_log_type = log_type;
+                    $(this).addClass('selected');
                 }
             });
         });
