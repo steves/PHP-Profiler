@@ -75,12 +75,11 @@
 
 /* ----- Console ----- */
 #profiler-console .side td { padding: 12px 0; }
-#profiler-console .side td.alt1 { background: #588E13; width: 51%; }    /** Logs **/
-#profiler-console .side td.alt2 { background-color: #B72F09; }          /** Errors **/
-#profiler-console .side td.alt3 { background: #A4A3A2; width: 51%; }    /** Benchmarks **/
-#profiler-console .side td.alt4 { background-color: #3769A0; }
-#profiler-console .side td.alt5 { background: #D28C00; border-left: 1px solid #9C6800; }  /** Memory **/
-#profiler-console .side td.alt6 { background-color: #3769A0; border-bottom: 1px solid #274B74; }    /** Speed **/
+#profiler-console .side td.console-log { background: #588E13; width: 51%; }    /** Logs **/
+#profiler-console .side td.console-errors { background-color: #B72F09; }          /** Errors **/
+#profiler-console .side td.console-memory { background: #D28C00; border-left: 1px solid #9C6800; }  /** Memory **/
+#profiler-console .side td.console-speed { background-color: #3769A0; border-bottom: 1px solid #274B74; }    /** Speed **/
+#profiler-console .side td.console-benchmarks { background: #A4A3A2; width: 51%; }    /** Benchmarks **/
 #profiler-console .side td.selected { background: #333; }
 #profiler-console .main table { width: 100%; }
 #profiler-console td div { width: 100%; overflow: hidden; }
