@@ -69,7 +69,7 @@
 .profiler .main td:hover { background: #2E2E2E; }
 
 /* ----- Side ----- */
-.profiler .side { float: left; width: 20%; background: #000; color: #fff; text-align: center; }
+.profiler .side { float: left; width: 20%; color: #fff; text-align: center; }
 .profiler .side var { color: #fff; font-size: 15px; }
 .profiler .side h4 { font-weight: normal; color: #F4FCCA; font-size: 11px; }
 
