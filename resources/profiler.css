@@ -47,7 +47,7 @@
 .hideDetails #profiler h4 { font-size: 10px; }
 
 /* ----- Metrics ----- */
-#profiler-metrics td { height: 80px; width: 20%; text-align: center; cursor: pointer; border: 1px solid #000; border-bottom: 6px solid #444; -webkit-border-top-left-radius: 10px; -moz-border-radius-topleft: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topright: 10px; }
+#profiler-metrics td { height: 80px; width: 20%; text-align: center; cursor: pointer; border: 1px solid #000; border-bottom: 6px solid #444; }
 #profiler-metrics td:hover { background: #222; border-bottom: 6px solid #777; }
 #profiler-metrics #console { border-left: none; }
 #profiler-metrics #files { border-right: none; }
@@ -69,7 +69,7 @@
 .profiler .main td:hover { background: #2E2E2E; }
 
 /* ----- Side ----- */
-.profiler .side { float: left; width: 20%; background: #000; color: #fff; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; text-align: center; }
+.profiler .side { float: left; width: 20%; background: #000; color: #fff; text-align: center; }
 .profiler .side var { color: #fff; font-size: 15px; }
 .profiler .side h4 { font-weight: normal; color: #F4FCCA; font-size: 11px; }
 
@@ -79,7 +79,7 @@
 #profiler-console .side td.alt2 { background-color: #B72F09; }          /** Errors **/
 #profiler-console .side td.alt3 { background: #A4A3A2; width: 51%; }    /** Benchmarks **/
 #profiler-console .side td.alt4 { background-color: #3769A0; }
-#profiler-console .side td.alt5 { background: #D28C00; border-left: 1px solid #9C6800; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }  /** Memory **/
+#profiler-console .side td.alt5 { background: #D28C00; border-left: 1px solid #9C6800; }  /** Memory **/
 #profiler-console .side td.alt6 { background-color: #3769A0; border-bottom: 1px solid #274B74; }    /** Speed **/
 #profiler-console .main table { width: 100%; }
 #profiler-console td div { width: 100%; overflow: hidden; }
@@ -101,7 +101,7 @@
 /* ----- Speed ----- */
 #profiler-speed .side td { padding: 12px 0; }
 #profiler-speed .side { background-color: #3769A0; }
-#profiler-speed .side td.alt { background-color: #2B5481; border-left: 1px solid #1E3C5C; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
+#profiler-speed .side td.alt { background-color: #2B5481; border-left: 1px solid #1E3C5C; }
 
 /* ----- Queries ----- */
 #profiler-queries .side { background-color: #953FA1; }
@@ -112,7 +112,7 @@
 /* ----- Memory ----- */
 #profiler-memory .side td { padding:12px 0; }
 #profiler-memory .side { background-color: #C48200; }
-#profiler-memory .side td.alt { background-color: #AC7200; border-left: 1px solid #865900; -webkit-border-bottom-left-radius: 30px; -moz-border-radius-bottomleft: 30px; }
+#profiler-memory .side td.alt { background-color: #AC7200; border-left: 1px solid #865900; }
 
 /* ----- Files ----- */
 #profiler-files .side { background-color: #B72F09; }
