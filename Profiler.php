@@ -29,7 +29,6 @@ class Profiler_Profiler {
 	 *
 	 * Possible configuration options include:
 	 * <ul>
-	 * <li><strong>css_url:</strong> The absolute path to the profile.css file (i.e. css/profiler.css)</li>
 	 * <li><strong>query_explain_callback:</strong> Callback used to explain queries. Follow format used by call_user_func</li>
 	 * </ul>
 	 *
