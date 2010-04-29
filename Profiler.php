@@ -161,7 +161,7 @@ class Profiler_Profiler {
 					$trimmed = trim($log['sql']);
 					$type = strtolower(substr($trimmed, 0, strpos($trimmed, ' ')));
 
-					if (isset($this->_queryTypes[$type]) && isset($queryTotals['types'][$type])) {
+					if (in_array($type, $this->_queryTypes) && isset($queryTotals['types'][$type])) {
 						$queryTotals['types'][$type]['total'] += 1;
 						$queryTotals['types'][$type]['time'] += $query['time'];
 					}
