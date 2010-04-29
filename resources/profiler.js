@@ -67,8 +67,6 @@
             }
 
             $(this).css('cursor', 'pointer').click(function() {
-                $(this).css('color', '00000');
-
                 $('#profiler-console .main tr').each(function() {
                     var row_type = $(this).attr('class').split('-')[1];
 
