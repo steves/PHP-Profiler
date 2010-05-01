@@ -11,10 +11,8 @@ PHP Profiler is a fork of PHP Quick Profiler by Ryan Campbell of [Particletree](
 Setup is very easy and straight-forward. There are five primary steps that need to be done.
 
 1. Checkout the code into your libraries directory so that the classes can be auto loaded.
-2. Copy profiler.css into your CSS directory
-3. Copy the Profiler images directory into your images directory.
-4. Instantiate Profiler_Profiler passing in the 'css_url' option.
-5. At the end of your application after all else is done call the display() method on Profiler_Profiler. 
+2. Instantiate Profiler_Profiler
+3. At the end of your application after all else is done call the display() method on Profiler_Profiler. 
 
 ## Setup and Usage ##
 Setting up PHP Profiler is quite simple. Below is a short code sample of the latest version.
