@@ -79,14 +79,19 @@ class Profiler_Profiler {
 					continue;
 				}
 
-				if ($log['type'] == 'log') {
-					$logs['console'][$key]['data'] = print_r($log['data'], true);
-				} elseif ($log['type'] == 'memory') {
-					$logs['console'][$key]['data'] = $this->getReadableFileSize($log['data']);
-				} elseif ($log['type'] == 'speed') {
-					$logs['console'][$key]['data'] = $this->getReadableTime(($log['data'] - $this->startTime)*1000);
-				} elseif ($log['type'] == 'benchmark') {
-					$logs['console'][$key]['data'] = $this->getReadableTime($log['end_time'] - $log['start_time']);
+				switch ($log['type']) {
+					case 'log':
+						$logs['console'][$key]['data'] = print_r($log['data'], true);
+						break;
+					case 'memory':
+						$logs['console'][$key]['data'] = $this->getReadableFileSize($log['data']);
+						break;
+					case 'speed':
+						$logs['console'][$key]['data'] = $this->getReadableTime(($log['data'] - $this->startTime)*1000);
+						break;
+					case 'benchmark':
+						$logs['console'][$key]['data'] = $this->getReadableTime($log['end_time'] - $log['start_time']);
+						break;
 				}
 			}
 		}
@@ -212,40 +217,36 @@ class Profiler_Profiler {
 		$this->output['speedTotals'] = $speedTotals;
 	}
 
-	public function gatherBenchmarkData() {
-
-	}
-
 	/**
 	 * Converts a number of bytes to a more readable format
 	 * @param int $size The number of bytes
 	 * @param string $retstring The format of the return string
 	 * @return string
 	 */
-	public function getReadableFileSize($size, $retstring = null) {
+	public function getReadableFileSize($size, $retString = null) {
 		$sizes = array('bytes', 'kB', 'MB', 'GB', 'TB');
 
-		if ($retstring === null) {
-			$retstring = '%01.2f %s';
+		if ($retString === null) {
+			$retString = '%01.2f %s';
 		}
 
-		$lastsizestring = end($sizes);
+		$lastSizeString = end($sizes);
 
-		foreach ($sizes as $sizestring) {
+		foreach ($sizes as $sizeString) {
 			if ($size < 1024) {
 				break;
 			}
 
-			if ($sizestring != $lastsizestring) {
+			if ($sizeString != $lastSizeString) {
 				$size /= 1024;
 			}
 		}
 
-		if ($sizestring == $sizes[0]) {
-			$retstring = '%01d %s';
+		if ($sizeString == $sizes[0]) {
+			$retString = '%01d %s';
 		}
 
-		return sprintf($retstring, $size, $sizestring);
+		return sprintf($retString, $size, $sizeString);
 	}
 
 	/**
@@ -257,6 +258,7 @@ class Profiler_Profiler {
 		$ret = $time;
 		$formatter = 0;
 		$formats = array('ms', 's', 'm');
+
 		if ($time >= 1000 && $time < 60000) {
 			$formatter = 1;
 			$ret = ($time / 1000);
@@ -281,7 +283,6 @@ class Profiler_Profiler {
 		$this->gatherMemoryData();
 		$this->gatherQueryData();
 		$this->gatherSpeedData();
-		$this->gatherBenchmarkData();
 
 		Profiler_Display::display($this->output, $this->config);
 	}
