@@ -75,16 +75,16 @@
 
 /* ----- Console ----- */
 #profiler-console .side td { padding: 12px 0; }
-#profiler-console .side td.console-log { background: #588E13; width: 51%; }    /** Logs **/
-#profiler-console .side td.console-errors { background-color: #B72F09; }          /** Errors **/
-#profiler-console .side td.console-memory { background: #D28C00; border-left: 1px solid #9C6800; }  /** Memory **/
-#profiler-console .side td.console-speed { background-color: #3769A0; border-bottom: 1px solid #274B74; }    /** Speed **/
-#profiler-console .side td.console-benchmarks { background: #A4A3A2; width: 51%; }    /** Benchmarks **/
+#profiler-console .side td.console-log { background: #588E13; width: 51%; }
+#profiler-console .side td.console-errors { background-color: #B72F09; }
+#profiler-console .side td.console-memory { background: #D28C00; border-left: 1px solid #9C6800; }
+#profiler-console .side td.console-speed { background-color: #3769A0; border-bottom: 1px solid #274B74; }
+#profiler-console .side td.console-benchmarks { background: #84A360 ; width: 51%; }
 #profiler-console .side td.selected { background: #333; }
 #profiler-console .main table { width: 100%; }
 #profiler-console td div { width: 100%; overflow: hidden; }
 #profiler-console td.type { font-family: "Lucida Grande", Tahoma, Arial, sans-serif; text-align: center; text-transform: uppercase; font-size: 9px; padding-top: 9px; color: #F4FCCA; vertical-align: top; width: 40px; }
-.profiler .log-benchmark td.type { background: #A4A3A2 !important; }
+.profiler .log-benchmark td.type { background: #84A360 !important; }
 .profiler .log-log td.type { background: #47740D !important; }
 .profiler .log-error td.type { background: #9B2700 !important; }
 .profiler .log-memory td.type { background: #D28C00 !important; }
