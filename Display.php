@@ -16,7 +16,7 @@ class Profiler_Display {
 
 		$side_bg_style = 'padding: 10px 0 5px 0; background: url(data:image/png;base64,' . $side_image . ') repeat-y right; ';
 
-		$logCount = count($output['logs']['console']) - $output['queryTotals']['count'];
+		$logCount = count($output['logs']['console']['messages']);
 		$fileCount = count($output['files']);
 		$memoryUsed = $output['memoryTotals']['used'];
 		$queryCount = $output['queryTotals']['all'];
@@ -57,21 +57,21 @@ class Profiler_Display {
 		} else {
 			echo '<table class="side" cellspacing="0">';
 			echo '<tr>';
-			echo '<td class="console-log" id="console-log"><var>' . $output['logs']['logCount'] . '</var><h4>Logs</h4></td>';
-			echo '<td class="console-errors" id="console-error"><var>' . $output['logs']['errorCount'] . '</var> <h4>Errors</h4></td>';
+			echo '<td class="console-log" id="console-log"><var>' . $output['logs']['console']['count'] . '</var><h4>Logs</h4></td>';
+			echo '<td class="console-errors" id="console-error"><var>' . $output['logs']['errors']['count'] . '</var> <h4>Errors</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="console-memory" id="console-memory"><var>' . $output['logs']['memoryCount'] . '</var> <h4>Memory</h4></td>';
-			echo '<td class="console-speed" id="console-speed"><var>' . $output['logs']['speedCount'] . '</var> <h4>Speed</h4></td>';
+			echo '<td class="console-memory" id="console-memory"><var>' . $output['logs']['memory']['count'] . '</var> <h4>Memory</h4></td>';
+			echo '<td class="console-speed" id="console-speed"><var>' . $output['logs']['speed']['count'] . '</var> <h4>Speed</h4></td>';
 			echo '</tr>';
 			echo '<tr>';
-			echo '<td class="console-benchmarks" id="console-benchmark"><var>' . $output['logs']['benchmarkCount'] . '</var><h4>Benchmarks</h4></td>';
+			echo '<td class="console-benchmarks" id="console-benchmark"><var>' . $output['logs']['benchmarks']['count'] . '</var><h4>Benchmarks</h4></td>';
 			echo '</tr>';
 			echo '</table>';
 			echo '<table class="main" cellspacing="0">';
 
 			$class = '';
-			foreach ($output['logs']['console'] as $log) {
+			foreach ($output['logs']['console']['messages'] as $log) {
 				if (!isset($log['type']) || $log['type'] == 'query') {
 					continue;
 				}
@@ -100,7 +100,7 @@ class Profiler_Display {
 
 		// Start Load Time tab
 		echo '<div id="profiler-speed" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
-		if ($output['logs']['speedCount'] ==  0) {
+		if ($output['logs']['speed']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';
@@ -210,7 +210,7 @@ class Profiler_Display {
 
 		// Start Memory tab
 		echo '<div id="profiler-memory" class="profiler-box" style="background: url(data:image/gif;base64,' . $overlay_image . '); border-top: 1px solid #ccc; height: 200px; overflow: auto;">';
-		if ($output['logs']['memoryCount'] ==  0) {
+		if ($output['logs']['memory']['count'] ==  0) {
 			echo '<h3>This panel has no log items.</h3>';
 		} else {
 			echo '<table class="side" cellspacing="0">';

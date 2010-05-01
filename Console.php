@@ -8,12 +8,14 @@ class Profiler_Console {
 	 * Holds the logs used when the console is displayed.
 	 * @var array
 	 */
-	private static $debugger_logs = array('console' => array(),
-		'logCount' => 0,
-		'memoryCount' => 0,
-		'errorCount' => 0,
-		'speedCount' => 0,
-		'benchmarkCount' => 0);
+	private static $_logs = array(
+		'console' => array('messages' => array(), 'count' => 0),
+		'memory' => array('messages' => array(), 'count' => 0),
+		'errors' => array('messages' => array(), 'count' => 0),
+		'speed' => array('messages' => array(), 'count' => 0),
+		'benchmarks' => array('messages' => array(), 'count' => 0),
+		'queries' => array('messages' => array(), 'count' => 0),
+		);
 
 	/**
 	 * Logs a variable to the console
@@ -21,16 +23,8 @@ class Profiler_Console {
 	 * @return void
 	 */
 	public static function log($data) {
-		if (!isset(self::$debugger_logs['console'])) {
-			self::$debugger_logs['console'] = array();
-		}
-
-		if (!isset(self::$debugger_logs['logCount'])) {
-			self::$debugger_logs['logCount'] = 0;
-		}
-
-		self::$debugger_logs['console'][] = array('data' => $data, 'type' => 'log');
-		self::$debugger_logs['logCount'] += 1;
+		self::$_logs['console']['messages'][] = array('data' => $data);
+		self::$_logs['console']['count'] += 1;
 	}
 
 	/**
@@ -43,12 +37,11 @@ class Profiler_Console {
 		$memory = $object ? strlen(serialize($object)) : memory_get_usage();
 
 		$log_item = array('data' => $memory,
-			'type' => 'memory',
 			'name' => $name,
 			'dataType' => gettype($object));
 
-		self::$debugger_logs['console'][] = $log_item;
-		self::$debugger_logs['memoryCount'] += 1;
+		self::$_logs['memory']['messages'][] = $log_item;
+		self::$_logs['memory']['count'] += 1;
 	}
 
 	/**
@@ -74,12 +67,10 @@ class Profiler_Console {
 	 * @return void
 	 */
 	public static function logSpeed($name = 'Point in Time') {
-		$log_item = array('data' => microtime(true),
-			'type' => 'speed',
-			'name' => $name);
+		$log_item = array('data' => microtime(true), 'name' => $name);
 
-		self::$debugger_logs['console'][] = $log_item;
-		self::$debugger_logs['speedCount'] += 1;
+		self::$_logs['speed']['messages'][] = $log_item;
+		self::$_logs['speed']['count'] += 1;
 	}
 
 	/**
@@ -95,27 +86,27 @@ class Profiler_Console {
 
 		// If this query is in the log we need to see if an end time has been set. If no
 		// end time has been set then we assume this call is closing a previous one.
-		if (isset(self::$debugger_logs['console'][$hash])) {
-			$query = array_pop(self::$debugger_logs['console'][$hash]);
+		if (isset(self::$_logs['queries']['messages'][$hash])) {
+			$query = array_pop(self::$_logs['queries']['messages'][$hash]);
 			if (!$query['end_time']) {
 				$query['end_time'] = microtime(true);
 				$query['explain'] = $explain;
 
-				self::$debugger_logs['console'][$hash][] = $query;
+				self::$_logs['queries']['messages'][$hash][] = $query;
 			} else {
-				self::$debugger_logs['console'][$hash][] = $query;
+				self::$_logs['queries']['messages'][$hash][] = $query;
 			}
 
+			self::$_logs['queries']['count'] += 1;
 			return;
 		}
 
 		$log_item = array('start_time' => microtime(true),
 			'end_time' => false,
 			'explain' => false,
-			'type' => 'query',
 			'sql' => $sql);
 
-		self::$debugger_logs['console'][$hash][] = $log_item;
+		self::$_logs['queries']['messages'][$hash][] = $log_item;
 	}
 	
 	/**
@@ -128,23 +119,22 @@ class Profiler_Console {
 	public static function logBenchmark($name) {
 		$key = 'benchmark_ ' . $name;
 
-		if (isset(self::$debugger_logs['console'][$key])) {
+		if (isset(self::$_logs['benchmarks']['messages'][$key])) {
 			$benchKey = md5(microtime(true));
 
-			self::$debugger_logs['console'][$benchKey] = self::$debugger_logs['console'][$key];
-			self::$debugger_logs['console'][$benchKey]['end_time'] = microtime(true);
-			
-			unset(self::$debugger_logs['console'][$key]);
+			self::$_logs['benchmarks']['messages'][$benchKey] = self::$_logs['benchmarks']['messages'][$key];
+			self::$_logs['benchmarks']['messages'][$benchKey]['end_time'] = microtime(true);
+			self::$_logs['benchmarks']['count'] += 1;
+
+			unset(self::$_logs['benchmarks']['messages'][$key]);
 			return;
 		}
 
 		$log_item = array('start_time' => microtime(true),
 			'end_time' => false,
-			'name' => $name,
-			'type' => 'benchmark');
+			'name' => $name);
 
-		self::$debugger_logs['console'][$key] = $log_item;
-		self::$debugger_logs['benchmarkCount'] += 1;
+		self::$_logs['benchmarks']['messages'][$key] = $log_item;
 	}
 
 	/**
@@ -152,6 +142,6 @@ class Profiler_Console {
 	 * @return array
 	 */
 	public static function getLogs() {
-		return self::$debugger_logs;
+		return self::$_logs;
 	}
 }

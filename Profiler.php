@@ -69,29 +69,42 @@ class Profiler_Profiler {
 	public function gatherConsoleData() {
 		$logs = Profiler_Console::getLogs();
 
-		if (!isset($logs['console']) || !is_array($logs['console'])) {
-			$logs['console'] = array();
-		}
 
-		if ($logs['console']) {
-			foreach ($logs['console'] as $key => $log) {
-				if (!isset($log['type'])) {
-					continue;
-				}
+		foreach ($logs as $type => $data) {
+			// Console data will already be properly formatted.
+			if ($type == 'console') {
+				continue;
+			}
 
-				switch ($log['type']) {
-					case 'log':
-						$logs['console'][$key]['data'] = print_r($log['data'], true);
+			// Ignore empty message lists
+			if (!$data['count']) {
+				continue;
+			}
+
+			foreach ($data['messages'] as $message) {
+				$data = $message;
+
+				switch ($type) {
+					case 'logs':
+						$data['type'] = 'log';
+						$data['data'] = print_r($message['data'], true);
 						break;
 					case 'memory':
-						$logs['console'][$key]['data'] = $this->getReadableFileSize($log['data']);
+						$data['type'] = 'memory';
+						$data['data'] = $this->getReadableFileSize($message['data']);
 						break;
 					case 'speed':
-						$logs['console'][$key]['data'] = $this->getReadableTime(($log['data'] - $this->startTime)*1000);
+						$data['type'] = 'speed';
+						$data['data'] = $this->getReadableTime(($message['data'] - $this->startTime) * 1000);
 						break;
-					case 'benchmark':
-						$logs['console'][$key]['data'] = $this->getReadableTime($log['end_time'] - $log['start_time']);
+					case 'benchmarks':
+						$data['type'] = 'benchmark';
+						$data['data'] = $this->getReadableTime($message['end_time'] - $message['start_time']);
 						break;
+				}
+
+				if (isset($data['type'])) {
+					$logs['console']['messages'][] = $data;
 				}
 			}
 		}
@@ -144,19 +157,14 @@ class Profiler_Profiler {
 		$types = array('select' => $type_default, 'update' => $type_default, 'insert' => $type_default, 'delete' => $type_default);
 		$queryTotals = array('all' => 0, 'count' => 0, 'time' => 0, 'duplicates' => 0, 'types' => $types);
 
-		foreach($this->output['logs']['console'] as $entries) {
-			// If type is set it's not a query
-			if (isset($entries['type'])) {
-				continue;
-			}
-
+		foreach($this->output['logs']['queries']['messages'] as $entries) {
 			if (count($entries) > 1) {
 				$queryTotals['duplicates'] += 1;
 			}
 
 			$queryTotals['count'] += 1;
 			foreach ($entries as $i => $log) {
-				if ($log['type'] == 'query' && isset($log['end_time'])) {
+				if (isset($log['end_time'])) {
 					$query = array('sql' => $log['sql'],
 						'explain' => $log['explain'],
 						'time' => ($log['end_time'] - $log['start_time']),
