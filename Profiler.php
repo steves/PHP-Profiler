@@ -91,7 +91,7 @@ class Profiler_Profiler {
 						break;
 					case 'memory':
 						$data['type'] = 'memory';
-						$data['data'] = $this->getReadableFileSize($message['data']);
+						$data['data'] = $this->getReadableFileSize($data['data']);
 						break;
 					case 'speed':
 						$data['type'] = 'speed';

@@ -72,10 +72,6 @@ class Profiler_Display {
 
 			$class = '';
 			foreach ($output['logs']['console']['messages'] as $log) {
-				if (!isset($log['type']) || $log['type'] == 'query') {
-					continue;
-				}
-
 				echo '<tr class="log-' . $log['type'] . '"><td class="type">' . $log['type'] . '</td><td class="' . $class . '">';
 
 				if ($log['type'] == 'log') {
@@ -110,9 +106,9 @@ class Profiler_Display {
 			echo '<table class="main" cellspacing="0">';
 
 			$class = '';
-			foreach ($output['logs']['console'] as $log) {
+			foreach ($output['logs']['console']['messages'] as $log) {
 				if (isset($log['type']) && $log['type'] == 'speed') {
-					echo '<tr class="log-' . $log['type'] . '"><td class="' . $class . '">';
+					echo '<tr class="log-speed"><td class="' . $class . '">';
 					echo '<div><pre>' . $log['data'] . '</pre> <em>' . $log['name'] . '</em></div>';
 					echo '</td></tr>';
 					$class = ($class == '') ? 'alt' : '';
@@ -220,9 +216,9 @@ class Profiler_Display {
 			echo '<table class="main" cellspacing="0">';
 
 			$class = '';
-			foreach ($output['logs']['console'] as $log) {
+			foreach ($output['logs']['console']['messages'] as $log) {
 				if (isset($log['type']) && $log['type'] == 'memory') {
-					echo '<tr class="log-' . $log['type'] . '">';
+					echo '<tr class="log-message">';
 					echo '<td class="' . $class . '"><b>' . $log['data'] . '</b> <em>' . $log['dataType'] . '</em>: ' . $log['name'] . '</td>';
 					echo '</tr>';
 					$class = ($class == '') ? 'alt' : '';
